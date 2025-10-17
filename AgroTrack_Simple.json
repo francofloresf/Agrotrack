@@ -1,0 +1,113 @@
+{
+	"info": {
+		"name": "AgroTrack Simple",
+		"description": "Colección simple para AgroTrack",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET Página Principal",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8888/"
+			}
+		},
+		{
+			"name": "GET Productos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8888/productos.html"
+			}
+		},
+		{
+			"name": "GET Contacto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8888/contacto.html"
+			}
+		},
+		{
+			"name": "GET Login",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8888/login.html"
+			}
+		},
+		{
+			"name": "POST Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "usuario",
+							"value": "Juan"
+						},
+						{
+							"key": "clave",
+							"value": "1234"
+						}
+					]
+				},
+				"url": "http://localhost:8888/auth/recuperar"
+			}
+		},
+		{
+			"name": "POST Contacto",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "nombre",
+							"value": "Juan Pérez"
+						},
+						{
+							"key": "email",
+							"value": "jperez@mail.com"
+						},
+						{
+							"key": "mensaje",
+							"value": "Quisiera información sobre servicios."
+						}
+					]
+				},
+				"url": "http://localhost:8888/contacto/cargar"
+			}
+		},
+		{
+			"name": "GET Listar Consultas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8888/contacto/listar"
+			}
+		},
+		{
+			"name": "GET Error 404",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8888/pagina-inexistente"
+			}
+		}
+	]
+}

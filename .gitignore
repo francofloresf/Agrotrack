@@ -1,11 +1,11 @@
-# Archivos que no se deben subir al repositorio
-
-# Carpeta de node_modules (pesada y se reinstala)
 node_modules/
 
-# Archivo de consultas (se crea automáticamente)
 data/consultas.txt
 
-# Archivos de logs
 *.log
 
+<<<<<<< HEAD
+=======
+
+README.md
+>>>>>>> c5f1e6ed251ed5d54118a6d61aac73c938d7841c

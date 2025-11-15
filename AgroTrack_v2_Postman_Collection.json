@@ -1,0 +1,417 @@
+{
+	"info": {
+		"_postman_id": "agrotrack-v2-2025",
+		"name": "AgroTrack v2.0 - Express + MySQL",
+		"description": "Colección de pruebas para AgroTrack v2.0\nServidor Express: http://localhost:3000\nAPI REST con MySQL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Health Check",
+			"item": [
+				{
+					"name": "GET /health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/health",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"health"
+							]
+						},
+						"description": "Verificar el estado del servidor"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API Contactos",
+			"item": [
+				{
+					"name": "GET /api/contactos - Listar todos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/contactos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"contactos"
+							]
+						},
+						"description": "Obtener todos los contactos de la base de datos"
+					},
+					"response": []
+				},
+				{
+					"name": "GET /api/contactos/:id - Obtener uno",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/contactos/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"contactos",
+								"1"
+							]
+						},
+						"description": "Obtener un contacto específico por ID"
+					},
+					"response": []
+				},
+				{
+					"name": "GET /api/contactos/:id - ID inválido",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/contactos/abc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"contactos",
+								"abc"
+							]
+						},
+						"description": "Probar error 400 con ID inválido"
+					},
+					"response": []
+				},
+				{
+					"name": "GET /api/contactos/:id - No encontrado",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/contactos/9999",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"contactos",
+								"9999"
+							]
+						},
+						"description": "Probar error 404 con ID que no existe"
+					},
+					"response": []
+				},
+				{
+					"name": "POST /api/contactos - Crear válido",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"María García\",\n    \"email\": \"maria.garcia@example.com\",\n    \"mensaje\": \"Me interesa conocer más sobre sus productos orgánicos y sistemas de riego inteligentes.\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/contactos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"contactos"
+							]
+						},
+						"description": "Crear un nuevo contacto con datos válidos"
+					},
+					"response": []
+				},
+				{
+					"name": "POST /api/contactos - Campos vacíos",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"\",\n    \"email\": \"\",\n    \"mensaje\": \"\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/contactos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"contactos"
+							]
+						},
+						"description": "Probar validación con campos vacíos (error 400)"
+					},
+					"response": []
+				},
+				{
+					"name": "POST /api/contactos - Email inválido",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Carlos López\",\n    \"email\": \"email-invalido\",\n    \"mensaje\": \"Este es un mensaje de prueba con email inválido.\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/contactos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"contactos"
+							]
+						},
+						"description": "Probar validación de formato de email (error 400)"
+					},
+					"response": []
+				},
+				{
+					"name": "POST /api/contactos - Nombre muy corto",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"A\",\n    \"email\": \"test@example.com\",\n    \"mensaje\": \"Mensaje de prueba con nombre muy corto.\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/contactos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"contactos"
+							]
+						},
+						"description": "Probar validación de longitud mínima del nombre (error 400)"
+					},
+					"response": []
+				},
+				{
+					"name": "POST /api/contactos - Mensaje muy corto",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Pedro Martínez\",\n    \"email\": \"pedro@example.com\",\n    \"mensaje\": \"Hola\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/contactos",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"contactos"
+							]
+						},
+						"description": "Probar validación de longitud mínima del mensaje (error 400)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Páginas Web",
+			"item": [
+				{
+					"name": "GET / - Página principal",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								""
+							]
+						},
+						"description": "Página principal del sitio"
+					},
+					"response": []
+				},
+				{
+					"name": "GET /productos.html",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/productos.html",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"productos.html"
+							]
+						},
+						"description": "Página de productos"
+					},
+					"response": []
+				},
+				{
+					"name": "GET /contacto.html",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/contacto.html",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"contacto.html"
+							]
+						},
+						"description": "Página de contacto"
+					},
+					"response": []
+				},
+				{
+					"name": "GET /login.html",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/login.html",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"login.html"
+							]
+						},
+						"description": "Página de login"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Errores",
+			"item": [
+				{
+					"name": "GET /ruta-inexistente - Error 404",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/ruta-inexistente",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"ruta-inexistente"
+							]
+						},
+						"description": "Probar manejo de error 404"
+					},
+					"response": []
+				},
+				{
+					"name": "POST /api/ruta-invalida - Error 404",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/ruta-invalida",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"ruta-invalida"
+							]
+						},
+						"description": "Probar error 404 en rutas POST"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

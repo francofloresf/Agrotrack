@@ -76,7 +76,7 @@ Verificar el estado del servidor
 
 ---
 
-### 📬 API de Contactos
+### API de Contactos
 
 #### **GET /api/contactos**
 Obtener todos los contactos
@@ -173,10 +173,10 @@ Importar la colección `AgroTrack_Postman_Collection.json` en Postman para proba
 Para estar versión 2.0 el archivo actulizado es `AgroTrack_v2_Postman_Collection.json`
 
 ### Pruebas incluidas:
-- ✅ GET /health
-- ✅ GET /api/contactos (listar todos)
-- ✅ GET /api/contactos/:id (obtener uno)
-- ✅ POST /api/contactos (crear válido)
-- ✅ POST /api/contactos (validaciones de error)
-- ✅ POST /api/contactos (email inválido)
-- ✅ GET / (página principal)
+- GET /health
+- GET /api/contactos (listar todos)
+- GET /api/contactos/:id (obtener uno)
+- POST /api/contactos (crear válido)
+- POST /api/contactos (validaciones de error)
+- POST /api/contactos (email inválido)
+- GET / (página principal)

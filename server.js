@@ -4,7 +4,6 @@ const url = require('url');
 
 const PORT = 8888;
 
-// Crear servidor
 const server = http.createServer((req, res) => {
     const parsedUrl = url.parse(req.url, true);
     const pathname = parsedUrl.pathname;
@@ -51,7 +50,7 @@ const server = http.createServer((req, res) => {
             });
         }
         
-        // Login (sin .html)
+        // Login
         else if (pathname === '/login') {
             fs.readFile('public/login.html', (err, data) => {
                 if (err) {
@@ -63,7 +62,7 @@ const server = http.createServer((req, res) => {
             });
         }
         
-        // Contacto (sin .html)
+        // Contacto
         else if (pathname === '/contacto') {
             fs.readFile('public/contacto.html', (err, data) => {
                 if (err) {
@@ -101,7 +100,7 @@ const server = http.createServer((req, res) => {
     // Rutas POST
     else if (method === 'POST') {
         
-        // Login
+        // Logi
         if (pathname === '/auth/recuperar') {
             let body = '';
             

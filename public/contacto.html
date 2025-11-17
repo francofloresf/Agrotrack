@@ -3,6 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Contacto - AgroTrack</title>
+    <style>
+        .mensaje-exito {
+            color: green;
+            padding: 10px;
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 4px;
+            margin: 10px 0;
+            display: none;
+        }
+        .mensaje-error {
+            color: red;
+            padding: 10px;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 4px;
+            margin: 10px 0;
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <h1>AgroTrack - Contacto</h1>
@@ -10,16 +30,20 @@
     <p><a href="/">Inicio</a> | <a href="/productos.html">Productos</a> | <a href="/contacto.html">Contacto</a> | <a href="/login.html">Login</a></p>
     
     <h2>Envíanos tu consulta</h2>
-    <form action="/contacto/cargar" method="POST">
+    
+    <div id="mensaje-exito" class="mensaje-exito"></div>
+    <div id="mensaje-error" class="mensaje-error"></div>
+    
+    <form id="formContacto">
         <p>
         <label for="nombre">Nombre:</label><br>
-        <input type="text" id="nombre" name="nombre" required><br><br>
+        <input type="text" id="nombre" name="nombre" required minlength="2"><br><br>
         
         <label for="email">Email:</label><br>
         <input type="email" id="email" name="email" required><br><br>
         
         <label for="mensaje">Mensaje:</label><br>
-        <textarea id="mensaje" name="mensaje" required rows="5" cols="40"></textarea><br><br>
+        <textarea id="mensaje" name="mensaje" required rows="5" cols="40" minlength="10"></textarea><br><br>
         
         <button type="submit">Enviar</button>
         <button type="reset">Limpiar</button>
@@ -29,8 +53,57 @@
     <h3>Información de contacto</h3>
     <p>Email: info@agrotrack.com</p>
     <p>Teléfono: +54 11 1234-5678</p>
-    
-    <p><a href="/contacto/listar">Ver todas las consultas</a></p>
+
+    <script>
+        const form = document.getElementById('formContacto');
+        const mensajeExito = document.getElementById('mensaje-exito');
+        const mensajeError = document.getElementById('mensaje-error');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Ocultar mensajes anteriores
+            mensajeExito.style.display = 'none';
+            mensajeError.style.display = 'none';
+
+            // Obtener datos del formulario
+            const datos = {
+                nombre: document.getElementById('nombre').value,
+                email: document.getElementById('email').value,
+                mensaje: document.getElementById('mensaje').value
+            };
+
+            try {
+                const response = await fetch('/api/contactos', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(datos)
+                });
+
+                const resultado = await response.json();
+
+                if (response.ok) {
+                    // Éxito
+                    mensajeExito.textContent = resultado.message;
+                    mensajeExito.style.display = 'block';
+                    form.reset();
+                } else {
+                    // Error de validación
+                    let mensajeErrorTexto = resultado.message || 'Error al enviar el formulario';
+                    if (resultado.errores && resultado.errores.length > 0) {
+                        mensajeErrorTexto += ':\n' + resultado.errores.join('\n');
+                    }
+                    mensajeError.textContent = mensajeErrorTexto;
+                    mensajeError.style.display = 'block';
+                }
+            } catch (error) {
+                mensajeError.textContent = 'Error de conexión con el servidor';
+                mensajeError.style.display = 'block';
+            }
+        });
+    </script>
 
 </body>
 </html>

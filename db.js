@@ -1,4 +1,4 @@
-// db.js - Configuración de la conexión a MySQL
+// Configuración de la conexión a MySQL
 const mysql = require('mysql2');
 require('dotenv').config();
 
@@ -16,26 +16,24 @@ const pool = mysql.createPool({
     keepAliveInitialDelay: 0
 });
 
-// Convertir a promesas para usar async/await
+// Convertir a promesas para usar async/await 
 const promisePool = pool.promise();
 
 // Verificar la conexión
 pool.getConnection((err, connection) => {
     if (err) {
-        console.error('❌ Error al conectar a la base de datos:', err.message);
-        console.error('   Verifica que MySQL esté ejecutándose en XAMPP');
-        console.error('   y que las credenciales en .env sean correctas');
+        console.error('Error al conectar a la base de datos:', err.message);
         return;
     }
-    console.log('✅ Conexión exitosa a la base de datos MySQL');
+    console.log('conexión exitosa a la base de datos mysql');
     connection.release();
 });
 
 // Manejar errores del pool
 pool.on('error', (err) => {
-    console.error('❌ Error inesperado en el pool de conexiones:', err);
+    console.error('Error inesperado en el pool de conexiones:', err);
     if (err.code === 'PROTOCOL_CONNECTION_LOST') {
-        console.error('   La conexión a la base de datos se perdió');
+        console.error('La conexión a la base de datos se perdió');
     }
 });
 

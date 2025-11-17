@@ -68,24 +68,17 @@ app.use(errorHandler);
 // ===== INICIAR SERVIDOR =====
 
 app.listen(PORT, () => {
-    console.log('='.repeat(50));
-    console.log('🚀 AgroTrack v2.0 - Servidor Express');
-    console.log('='.repeat(50));
-    console.log(`📡 Servidor ejecutándose en: http://localhost:${PORT}`);
-    console.log(`🏥 Health check: http://localhost:${PORT}/health`);
-    console.log(`📦 API Contactos: http://localhost:${PORT}/api/contactos`);
-    console.log('='.repeat(50));
-    console.log('✨ Presiona Ctrl+C para detener el servidor');
+    console.log(`run:${PORT}`);
 });
 
 // Manejo de errores no capturados
 process.on('uncaughtException', (error) => {
-    console.error('❌ Error no capturado:', error);
+    console.error('Error no capturado:', error);
     process.exit(1);
 });
 
 process.on('unhandledRejection', (reason, promise) => {
-    console.error('❌ Promesa rechazada no manejada:', reason);
+    console.error('Promesa rechazada no manejada:', reason);
     process.exit(1);
 });
 

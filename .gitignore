@@ -4,6 +4,8 @@ node_modules/
 # Variables de entorno
 .env
 
+.env.example
+
 # Archivos de datos
 data/consultas.txt
 

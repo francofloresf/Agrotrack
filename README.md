@@ -4,11 +4,11 @@
 **Proyecto:** Portal web interno AgroTrack - Versión 2.0  
 ---
 
-## 📋 Descripción
+## Descripción
 
 Esta versión 2.0 implementa una API REST para la gestión de contactos con persistencia en base de datos.
 
-## 🚀 Instalación y Configuración
+## Instalación y Configuración
 
 ### Pasos de instalación:
 
@@ -56,9 +56,9 @@ El servidor estará disponible en: **http://localhost:3000**
 
 ---
 
-## 📡 Endpoints de la API
+##  Endpoints de la API
 
-### 🏥 Health Check
+###  Health Check
 
 **GET /health**  
 Verificar el estado del servidor
@@ -166,7 +166,7 @@ Crear un nuevo contacto
 
 ---
 
-## 🧪 Pruebas con Postman
+## Pruebas con Postman
 
 Importar la colección `AgroTrack_Postman_Collection.json` en Postman para probar todos los endpoints.
 
